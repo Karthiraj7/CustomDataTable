@@ -107,9 +107,24 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
   };
 
   handleColumnSearch = (header: string, searchText: string) => {
-    const filteredSuggestions = this.props.data
-      .map(row => row ? `${row[this.props.columnHeaders.indexOf(header)] || ''}`.toLowerCase() : '')
-      .filter(value => value.includes(searchText.toLowerCase()));
+    const { data, columnHeaders } = this.props;
+    const headerIndex = columnHeaders.indexOf(header);
+
+    // Use a Set to keep track of unique values
+    const uniqueSuggestions = new Set<string>();
+
+    data.forEach(row => {
+      if (row) {
+        const cellValue = `${row[headerIndex] || ''}`.toLowerCase();
+        if (cellValue.includes(searchText.toLowerCase())) {
+          uniqueSuggestions.add(cellValue);
+        }
+      }
+    });
+
+    // Convert the Set back to an array
+    const filteredSuggestions = Array.from(uniqueSuggestions);
+
     this.setState(prevState => ({
       columnSuggestions: {
         ...prevState.columnSuggestions,
