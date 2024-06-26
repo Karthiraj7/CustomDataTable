@@ -136,11 +136,14 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
 
   handleSuggestionSelect = (header: string, value: string) => {
     const { columnFilters } = this.state;
+
+    // Update column filter with the selected suggestion
     this.setState({
       columnFilters: {
         ...columnFilters,
         [header]: value
       },
+      // Reset suggestions for the column
       columnSuggestions: {
         ...this.state.columnSuggestions,
         [header]: []
@@ -202,6 +205,7 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
       const uniqueValues = Array.from(new Set(data.map(row => row ? `${row[columnHeaders.indexOf(header)] || ''}`.toLowerCase() : '')));
       return { ...acc, [header]: uniqueValues };
     }, {} as { [key: string]: string[] });
+
     return (
       <div>
         <input
