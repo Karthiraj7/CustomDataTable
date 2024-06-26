@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as  React from 'react';
 
 interface DataTableProps {
   columnHeaders: string[];
@@ -136,18 +136,16 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
 
   handleSuggestionSelect = (header: string, value: string) => {
     const { columnFilters } = this.state;
-
-    // Update column filter with the selected suggestion
     this.setState({
       columnFilters: {
         ...columnFilters,
         [header]: value
       },
-      // Reset suggestions for the column
       columnSuggestions: {
         ...this.state.columnSuggestions,
         [header]: []
       },
+      globalFilter: value, // Auto-complete in global filter
       currentPage: 1
     });
   };
