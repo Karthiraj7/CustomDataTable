@@ -202,7 +202,6 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
       const uniqueValues = Array.from(new Set(data.map(row => row ? `${row[columnHeaders.indexOf(header)] || ''}`.toLowerCase() : '')));
       return { ...acc, [header]: uniqueValues };
     }, {} as { [key: string]: string[] });
-
     return (
       <div>
         <input

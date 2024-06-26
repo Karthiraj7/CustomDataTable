@@ -1,10 +1,13 @@
-# sample
+# CustomDataTable
 
 ## Summary
 
-Short summary on functionality and used technologies.
+The DataTable component is a versatile tool for displaying and interacting with structured data in a web application, offering robust filtering, sorting, and pagination capabilities along with flexible customization options for column visibility and alignment. It is well-suited for applications requiring complex data presentation and user-driven data exploration.
 
-[picture of the solution in action, if possible]
+![Screenshot 2024-06-25 145718](https://github.com/Karthiraj7/CustomDataTable/assets/108760004/e679602e-93ac-4274-a012-d136b55f33d6)
+![Screenshot 2024-06-25 145718](https://github.com/Karthiraj7/CustomDataTable/assets/108760004/7034a79c-38fb-4770-8012-e882f2339522)
+![Screenshot 2024-06-25 145729](https://github.com/Karthiraj7/CustomDataTable/assets/108760004/175dcc65-f29a-47ae-ba60-38c9693c25ed)
+![Screenshot 2024-06-25 145752](https://github.com/Karthiraj7/CustomDataTable/assets/108760004/cbfe3d68-b337-4f77-bb52-0ca1ff736018)
 
 ## Used SharePoint Framework Version
 
