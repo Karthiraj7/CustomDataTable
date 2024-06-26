@@ -216,6 +216,7 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
           onChange={(e) => this.handleGlobalFilter(e.target.value)}
         />
         <br />
+        <br/>
         <div>
           <label>Select items per page:</label>
           <select
@@ -275,6 +276,7 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
                      </select>
                    </div>
                    <div>
+                   
                      {uniqueColumnValues[header].map((value, index) => (
                        <label key={index}>
                          <input
