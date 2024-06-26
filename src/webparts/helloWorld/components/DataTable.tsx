@@ -1,4 +1,4 @@
-import * as  React from 'react';
+import * as React from 'react';
 
 interface DataTableProps {
   columnHeaders: string[];
@@ -130,6 +130,10 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
         ...prevState.columnSuggestions,
         [header]: filteredSuggestions
       },
+      columnFilters: {
+        ...prevState.columnFilters,
+        [header]: searchText // Update columnFilters[header] with current search text
+      },
       currentPage: 1
     }));
   };
@@ -145,7 +149,6 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
         ...this.state.columnSuggestions,
         [header]: []
       },
-      globalFilter: value, // Auto-complete in global filter
       currentPage: 1
     });
   };
@@ -238,15 +241,16 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
                     </button>
                   </div>
                   {columnDropdownVisible[header] && (
-                    <div className="dropdown">
-                      <div>
-                        <label>Search:</label>
-                        <input
+                   <div className="dropdown">
+                   <div>
+                     <label>Search:</label>
+                     <input
                           type="text"
                           placeholder={`Search ${header}...`}
+                          value={columnFilters[header]} // Ensure correct binding here
                           onChange={(e) => this.handleColumnSearch(header, e.target.value)}
                         />
-                        {columnSuggestions[header].length > 0 && (
+                    {columnSuggestions[header].length > 0 && (
                           <div>
                             {columnSuggestions[header].map((value, index) => (
                               <button
@@ -258,31 +262,32 @@ class DataTable extends React.Component<DataTableProps, DataTableState> {
                             ))}
                           </div>
                         )}
-                      </div>
-                      <div>
-                        <label>Alignment:</label>
-                        <select
-                          value={columnAlignments[header]}
-                          onChange={(e) => this.handleAlignmentChange(header, e.target.value as 'left' | 'center' | 'right')}
-                        >
-                          <option value="left">Left</option>
-                          <option value="center">Center</option>
-                          <option value="right">Right</option>
-                        </select>
-                      </div>
-                      <div>
-                        {uniqueColumnValues[header].map((value, index) => (
-                          <label key={index}>
-                            <input
-                              type="checkbox"
-                              checked={columnSelections[header].has(value)}
-                              onChange={() => this.handleColumnFilter(header, value)}
-                            />
-                            {value}
-                          </label>
-                        ))}
-                      </div>
-                    </div>
+                   </div>
+                   <div>
+                     <label>Alignment:</label>
+                     <select
+                       value={columnAlignments[header]}
+                       onChange={(e) => this.handleAlignmentChange(header, e.target.value as 'left' | 'center' | 'right')}
+                     >
+                       <option value="left">Left</option>
+                       <option value="center">Center</option>
+                       <option value="right">Right</option>
+                     </select>
+                   </div>
+                   <div>
+                     {uniqueColumnValues[header].map((value, index) => (
+                       <label key={index}>
+                         <input
+                           type="checkbox"
+                           checked={columnSelections[header].has(value)}
+                           onChange={() => this.handleColumnFilter(header, value)}
+                         />
+                         {value}
+                       </label>
+                     ))}
+                   </div>
+                 </div>
+                 
                   )}
                 </th>
               ))}
